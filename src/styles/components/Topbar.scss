@@ -1,0 +1,22 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text);
+
+  .demo-badge {
+    font-weight: bold;
+    background: var(--pie3);
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.5rem;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}

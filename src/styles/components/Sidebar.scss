@@ -1,0 +1,22 @@
+.sidebar {
+  background-color: var(--sidebar-bg);
+  padding: 1rem;
+  width: 220px;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@use "../_variables";
+
+.layout {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  padding: 1rem;
+
+  .card {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+    color: var(--text);
+  }
+
+  .full {
+    grid-column: span 2;
+  }
+
+  .placeholder {
+    text-align: center;
+    font-size: 1.2rem;
+    opacity: 0.6;
+  }
+}
