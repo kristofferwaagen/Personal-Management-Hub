@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react"; // ✅ Make sure useState is imported
+import { useDispatch } from "react-redux";
+import { injectMockExpensesIfEmpty } from "../utils/mockData";
+
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import BudgetSummaryCard from "../components/BudgetSummaryCard";
@@ -9,10 +12,17 @@ import Modal from "../components/Modal";
 import "../styles/pages/BudgetBuddy.scss";
 
 const BudgetBuddy = () => {
+  const dispatch = useDispatch();
   const [isAddOpen, setAddOpen] = useState(false);
   const [isRemoveOpen, setRemoveOpen] = useState(false);
   const [isBudgetOpen, setBudgetOpen] = useState(false);
   const [isCurrencyOpen, setCurrencyOpen] = useState(false);
+
+  // ✅ Inject mock data when component mounts
+  useEffect(() => {
+    injectMockExpensesIfEmpty(dispatch);
+  }, [dispatch]);
+
   return (
     <div className="layout">
       <Sidebar />
@@ -24,6 +34,8 @@ const BudgetBuddy = () => {
           <button onClick={() => setBudgetOpen(true)}>Adjust budget</button>
           <button onClick={() => setCurrencyOpen(true)}>Change currency</button>
         </div>
+
+        {/* Modals */}
         <Modal isOpen={isAddOpen} onClose={() => setAddOpen(false)}>
           <ControlsPanel only="add" onClose={() => setAddOpen(false)} />
         </Modal>
@@ -43,8 +55,8 @@ const BudgetBuddy = () => {
           />
         </Modal>
 
+        {/* Dashboard */}
         <div className="grid">
-          {/* Cards and charts will go here */}
           <div className="card">
             <BudgetSummaryCard />
           </div>

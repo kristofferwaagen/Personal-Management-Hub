@@ -1,3 +1,5 @@
+// src/utils/storage.js
+
 // EXPENSES
 export const loadExpenses = () => {
   return JSON.parse(localStorage.getItem("expenses")) || [];

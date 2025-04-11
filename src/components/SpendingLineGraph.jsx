@@ -8,8 +8,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
-import { useEffect, useState } from "react";
-import { loadExpenses, loadBudget, loadCurrency } from "../utils/storage";
+import { useSelector } from "react-redux";
 import "../styles/components/SpendingLineGraph.scss";
 
 const DAYS = 30;
@@ -26,36 +25,28 @@ const generateDateArray = () => {
 };
 
 const SpendingLineGraph = () => {
-  const [data, setData] = useState([]);
-  const [currency, setCurrency] = useState("NOK");
+  const expenses = useSelector((state) => state.expenses);
+  const budget = useSelector((state) => state.budget);
+  const currency = useSelector((state) => state.currency);
 
-  useEffect(() => {
-    const budget = loadBudget();
-    const expenses = loadExpenses();
-    const currencyValue = loadCurrency();
-    setCurrency(currencyValue);
+  const dates = generateDateArray();
+  const dailyBudget = budget / DAYS;
 
-    const dailyBudget = budget / DAYS;
-    const dates = generateDateArray();
+  const cumulativeSpend = {};
+  let runningTotal = 0;
 
-    const cumulativeSpend = {};
-    let runningTotal = 0;
+  dates.forEach((date) => {
+    const dayExpenses = expenses.filter((e) => e.date === date);
+    const dayTotal = dayExpenses.reduce((sum, e) => sum + e.amount, 0);
+    runningTotal += dayTotal;
+    cumulativeSpend[date] = runningTotal;
+  });
 
-    dates.forEach((date) => {
-      const dayExpenses = expenses.filter((e) => e.date === date);
-      const dayTotal = dayExpenses.reduce((sum, e) => sum + e.amount, 0);
-      runningTotal += dayTotal;
-      cumulativeSpend[date] = runningTotal;
-    });
-
-    const dataPoints = dates.map((date, index) => ({
-      date,
-      spent: cumulativeSpend[date] || 0,
-      budget: dailyBudget * (index + 1),
-    }));
-
-    setData(dataPoints);
-  }, []);
+  const data = dates.map((date, index) => ({
+    date,
+    spent: cumulativeSpend[date] || 0,
+    budget: dailyBudget * (index + 1),
+  }));
 
   return (
     <div className="spending-graph">

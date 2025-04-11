@@ -1,51 +1,33 @@
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { useEffect, useState } from "react";
-import { loadExpenses, loadCurrency } from "../utils/storage";
-import "../styles/components/CategoryPieChart.scss";
+import { useSelector } from "react-redux";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#A4C3B2", "#E6B8A2", "#A2D2FF", "#F6EEE0", "#C0B9DD"];
-const CATEGORIES = ["Groceries", "Housing", "Transport", "Leisure", "Other"];
+const COLORS = ["#A1C6A5", "#F7D59C", "#9EADC8", "#F6B3A2", "#DDD3C4"];
 
 const CategoryPieChart = () => {
-  const [data, setData] = useState([]);
-  const [currency, setCurrency] = useState("NOK");
+  const expenses = useSelector((state) => state.expenses);
+  const currency = useSelector((state) => state.currency);
 
-  useEffect(() => {
-    const expenses = loadExpenses();
-    const currencyVal = loadCurrency();
+  const categoryTotals = expenses.reduce((acc, exp) => {
+    acc[exp.category] = (acc[exp.category] || 0) + exp.amount;
+    return acc;
+  }, {});
 
-    const grouped = CATEGORIES.map((cat) => {
-      const total = expenses
-        .filter((e) => e.category === cat)
-        .reduce((sum, e) => sum + e.amount, 0);
-      return { name: cat, value: total };
-    });
-
-    setData(grouped);
-    setCurrency(currencyVal);
-  }, []);
+  const data = Object.entries(categoryTotals).map(([category, amount]) => ({
+    name: category,
+    value: amount,
+  }));
 
   return (
-    <div className="category-pie-card">
-      <h2>Category Breakdown</h2>
-      <ResponsiveContainer width="100%" height={240}>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            outerRadius={80}
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip formatter={(value) => [`${value} ${currency}`, "Spent"]} />
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie data={data} dataKey="value" nameKey="name" outerRadius={90} label>
+          {data.map((_, index) => (
+            <Cell key={index} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip formatter={(value) => `${value} ${currency}`} />
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
 

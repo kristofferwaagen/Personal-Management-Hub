@@ -1,18 +1,20 @@
 import { useState } from "react";
-import {
-  loadExpenses,
-  saveExpenses,
-  loadBudget,
-  saveBudget,
-  loadCurrency,
-  saveCurrency,
-} from "../utils/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpense, removeExpense } from "../store/slices/expensesSlice";
+import { setBudget } from "../store/slices/budgetSlice";
+import { setCurrency } from "../store/slices/currencySlice";
 import "../styles/components/ControlsPanel.scss";
 
 const categories = ["Groceries", "Housing", "Transport", "Leisure", "Other"];
 const currencies = ["NOK", "USD", "EUR"];
 
 const ControlsPanel = ({ only = "all", onClose }) => {
+  const dispatch = useDispatch();
+
+  const expenses = useSelector((state) => state.expenses);
+  const budget = useSelector((state) => state.budget);
+  const currency = useSelector((state) => state.currency);
+
   // Form states
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Groceries");
@@ -20,10 +22,6 @@ const ControlsPanel = ({ only = "all", onClose }) => {
   const [date, setDate] = useState(
     () => new Date().toISOString().split("T")[0]
   );
-
-  // Budget + currency
-  const [budget, setBudget] = useState(loadBudget());
-  const [currency, setCurrency] = useState(loadCurrency());
 
   const handleAddExpense = () => {
     if (!amount || isNaN(amount)) return alert("Please enter a valid amount.");
@@ -36,8 +34,7 @@ const ControlsPanel = ({ only = "all", onClose }) => {
       date,
     };
 
-    const updated = [...loadExpenses(), newExpense];
-    saveExpenses(updated);
+    dispatch(addExpense(newExpense));
 
     // Reset form
     setAmount("");
@@ -45,25 +42,21 @@ const ControlsPanel = ({ only = "all", onClose }) => {
     setCategory("Groceries");
     setDate(new Date().toISOString().split("T")[0]);
 
-    if (onClose) onClose(); // Close modal if provided
+    if (onClose) onClose();
   };
 
   const handleRemoveExpense = (id) => {
-    const updated = loadExpenses().filter((e) => e.id !== Number(id));
-    saveExpenses(updated);
-    alert("Expense removed");
+    dispatch(removeExpense(Number(id)));
+    if (onClose) onClose();
   };
 
   const handleBudgetChange = (e) => {
     const value = parseFloat(e.target.value) || 0;
-    setBudget(value);
-    saveBudget(value);
+    dispatch(setBudget(value));
   };
 
   const handleCurrencyChange = (e) => {
-    const value = e.target.value;
-    setCurrency(value);
-    saveCurrency(value);
+    dispatch(setCurrency(e.target.value));
   };
 
   return (
@@ -107,7 +100,7 @@ const ControlsPanel = ({ only = "all", onClose }) => {
           <h2>Remove Expense</h2>
           <select onChange={(e) => handleRemoveExpense(e.target.value)}>
             <option value="">Select an expense</option>
-            {loadExpenses().map((expense) => (
+            {expenses.map((expense) => (
               <option key={expense.id} value={expense.id}>
                 {expense.description} - {expense.amount} {currency}
               </option>
