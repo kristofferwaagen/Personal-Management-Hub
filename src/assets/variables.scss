@@ -1,0 +1,27 @@
+/* Light Theme */
+:root {
+  --bg: #E9E5D5;
+  --card-bg: #D6E1D2;
+  --sidebar-bg: #F6EEE0;
+  --text: #2B3937;
+
+  --pie1: #B2C9AB;
+  --pie2: #C8B8A9;
+  --pie3: #AFCFD3;
+  --pie4: #E2BFC6;
+  --pie5: #E3D4B9;
+}
+
+/* Dark Theme */
+body.dark {
+  --bg: #1C1C1A;
+  --card-bg: #2A2E2B;
+  --sidebar-bg: #242320;
+  --text: #F0F0F0;
+
+  --pie1: #9ABF88;
+  --pie2: #AA8C8E;
+  --pie3: #6C9BA6;
+  --pie4: #B48B9A;
+  --pie5: #D0C4A6;
+}
