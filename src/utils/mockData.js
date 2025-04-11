@@ -1,12 +1,19 @@
-import { loadExpenses, saveExpenses } from "./storage";
+import { loadExpenses, saveExpenses, loadBudget, saveBudget } from "./storage";
 
 export function injectMockExpensesIfEmpty() {
   const existing = loadExpenses();
-  if (existing.length > 0) return;
+  if (existing.length === 0) {
+    const mockExpenses = generateMockExpenses();
+    saveExpenses(mockExpenses);
+    console.log("💾 Mock expenses injected.");
+  }
 
-  const mockExpenses = generateMockExpenses();
-  saveExpenses(mockExpenses);
-  console.log("💾 Mock expenses injected.");
+  const currentBudget = loadBudget();
+  if (!currentBudget || currentBudget <= 0) {
+    const randomBudget = Math.floor(Math.random() * 10000 + 5000); // 5000–15000
+    saveBudget(randomBudget);
+    console.log(`💰 Mock budget set: ${randomBudget}`);
+  }
 }
 
 function generateMockExpenses() {
