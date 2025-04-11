@@ -1,0 +1,48 @@
+.budget-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--text);
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0.8rem;
+
+    li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .progress-bar {
+    background-color: #ccc;
+    border-radius: 8px;
+    height: 24px;
+    overflow: hidden;
+
+    .fill {
+      background-color: var(--text);
+      height: 100%;
+      color: #fff;
+      text-align: right;
+      padding-right: 0.5rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+}

@@ -20,11 +20,11 @@
   padding: 1rem;
 
   .card {
-    background: var(--card-bg);
-    padding: 1rem;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
-    color: var(--text);
+    border: none;
+    outline: none;
   }
 
   .full {

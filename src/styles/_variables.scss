@@ -1,27 +1,29 @@
 /* Light Theme */
 :root {
-  --bg: #E9E5D5;
-  --card-bg: #D6E1D2;
-  --sidebar-bg: #F6EEE0;
-  --text: #2B3937;
+  --bg: #e9e5d5;
+  --card-bg: #d6e1d2;
+  --sidebar-bg: #f6eee0;
+  --text: #2b3937;
 
-  --pie1: #B2C9AB;
-  --pie2: #C8B8A9;
-  --pie3: #AFCFD3;
-  --pie4: #E2BFC6;
-  --pie5: #E3D4B9;
+  --pie1: #b2c9ab;
+  --pie2: #c8b8a9;
+  --pie3: #afcfd3;
+  --pie4: #e2bfc6;
+  --pie5: #e3d4b9;
+
+  --accent: #c7d8c0;
 }
 
 /* Dark Theme */
 body.dark {
-  --bg: #1C1C1A;
-  --card-bg: #2A2E2B;
+  --bg: #1c1c1a;
+  --card-bg: #2a2e2b;
   --sidebar-bg: #242320;
-  --text: #F0F0F0;
+  --text: #f0f0f0;
 
-  --pie1: #9ABF88;
-  --pie2: #AA8C8E;
-  --pie3: #6C9BA6;
-  --pie4: #B48B9A;
-  --pie5: #D0C4A6;
+  --pie1: #9abf88;
+  --pie2: #aa8c8e;
+  --pie3: #6c9ba6;
+  --pie4: #b48b9a;
+  --pie5: #d0c4a6;
 }

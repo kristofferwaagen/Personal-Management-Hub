@@ -1,0 +1,20 @@
+.spending-graph {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: "Fredoka", sans-serif;
+  color: var(--text);
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .recharts-legend-item-text {
+    font-size: 0.85rem;
+  }
+
+  .recharts-tooltip-label {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,65 @@
+.controls-panel {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 12px;
+
+  h2 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input,
+    select,
+    button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: var(--pie3);
+      color: var(--text);
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.top-controls {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 1rem 0 1rem;
+
+  button {
+    background: var(--card-bg);
+    color: var(--text);
+    font-family: "Fredoka", sans-serif;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &.add {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.expense-list {
+  margin-top: 1rem;
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 0.5rem;
+      margin-bottom: 0.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

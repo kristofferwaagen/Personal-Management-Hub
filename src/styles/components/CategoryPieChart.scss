@@ -1,0 +1,20 @@
+.category-pie-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: "Fredoka", sans-serif;
+  color: var(--text);
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .recharts-default-legend {
+    font-size: 0.8rem;
+  }
+
+  .recharts-tooltip-label {
+    font-weight: bold;
+  }
+}
